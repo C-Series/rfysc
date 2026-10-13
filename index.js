@@ -1,5 +1,5 @@
-const API = "http://localhost:5555/api/channels";
-const API_FASTEST = "http://localhost:5555/api/fastest";
+const API = "https://falling-upload-rock-wishing.trycloudflare.com/api/channels";
+const API_FASTEST = "https://falling-upload-rock-wishing.trycloudflare.com/api/fastest";
 
 let currentId = 74;      // channel currently shown
 let allChannels = [];    // every channel, loaded once for search
