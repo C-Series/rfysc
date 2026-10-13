@@ -1,8 +1,8 @@
 const API = "https://falling-upload-rock-wishing.trycloudflare.com/api/channels";
 const API_FASTEST = "https://falling-upload-rock-wishing.trycloudflare.com/api/fastest";
 
-let currentId = 74;      // channel currently shown
-let allChannels = [];    // every channel, loaded once for search
+let currentId = 74;
+let allChannels = [];
 
 const subOdo = new Odometer({
     el: document.getElementById("subscriberCount"),
@@ -11,14 +11,10 @@ const subOdo = new Odometer({
     duration: 2000
 });
 
-
-
-/* ---------- Live chart ---------- */
-
-const MAX_POINTS = 720; // ~30 minutes of history at one point every 2.5s
+const MAX_POINTS = 720;
 
 Highcharts.setOptions({
-    time: { useUTC: false },          // show the viewer's local time
+    time: { useUTC: false },
     lang: { thousandsSep: "," }
 });
 
@@ -50,7 +46,7 @@ const chart = Highcharts.chart("subChart", {
         series: {
             color: "#0c7eac",
             lineWidth: 2,
-            marker: { enabled: false },   // <- hides the dots
+            marker: { enabled: false },
             animation: { duration: 400 }
         }
     },
@@ -59,7 +55,6 @@ const chart = Highcharts.chart("subChart", {
 
 function addChartPoint(count) {
     const series = chart.series[0];
-    // shift the oldest point off once we hit the limit
     series.addPoint([Date.now(), count], true, series.data.length >= MAX_POINTS);
 }
 
@@ -98,8 +93,6 @@ document.querySelector(".livecount").addEventListener("click", () => {
     openTab('livecount')
 })
 
-/* ---------- Live count ---------- */
-
 $.getJSON(API_FASTEST, function(e) {
     for (let i = 0; i < 10; i++) {
         var element = `
@@ -118,7 +111,7 @@ $.getJSON(API_FASTEST, function(e) {
 function update() {
     const id = currentId;
     $.getJSON(API + "?ids=" + id, function (e) {
-        if (id !== currentId) return; // user switched channel while this was loading
+        if (id !== currentId) return;
         const c = e.channels[0];
         $(".alt-pfp").attr("src", c.image);
         $(".channelName").text(c.name);
@@ -131,14 +124,11 @@ function update() {
 update();
 setInterval(update, 3000);
 
-/* ---------- Search ---------- */
-
 const $input = $(".search-bar");
 const $results = $(".search-results");
 let shown = [];
 let activeIndex = -1;
 
-// Load every channel once so searching is instant
 $.getJSON(API, function (data) {
     allChannels = Array.isArray(data) ? data : (data.channels || []);
 });
@@ -158,8 +148,7 @@ function setActive(i) {
 
 function selectChannel(c) {
     currentId = c.id;
-    chart.series[0].setData([]); // start a fresh graph for the new channel
-    // Show what we already know right away, then let update() refresh it
+    chart.series[0].setData([]);
     $(".alt-pfp").attr("src", c.image);
     $(".channelName").text(c.name);
     $input.val("").blur();
@@ -174,7 +163,6 @@ function renderResults(query) {
 
     shown = allChannels
         .filter(c => (c.name || "").toLowerCase().includes(q))
-        // names that start with the query come first
         .sort((a, b) => {
             const aStarts = a.name.toLowerCase().startsWith(q) ? 0 : 1;
             const bStarts = b.name.toLowerCase().startsWith(q) ? 0 : 1;
@@ -190,7 +178,6 @@ function renderResults(query) {
                 .append($("<img>").attr("src", c.image).attr("alt", ""))
                 .append($("<span>").addClass("result-name").text(c.name))
                 .append($("<span>").addClass("result-subs").text(Number(c.subscriberCount).toLocaleString()))
-                // mousedown fires before the input loses focus, so the click isn't lost
                 .on("mousedown", function (ev) {
                     ev.preventDefault();
                     selectChannel(c);
