@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./yt-odo.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="top">
+        <div class="top-inner">
+            <span class="brand">C-Series' FYSC Stats</span>
+            <button class="ui-btn button_fullList">Full List</button>
+            <div class="search-wrap">
+                <input class="search-bar" type="search" placeholder="Search Channels" aria-label="Search channels" autocomplete="off">
+                <div class="search-results" style="display: none;"></div>
+            </div>
+        </div>
+    </header>
+
+    <side class="side-bar">
+        <div class="fast-area">
+            <span class="mtl">Top 10 fastest gaining</span>
+
+            <div class="fast_ch_inner">
+
+            </div>
+        </div>
+    </side>
+
+    <main class="main">
+        <div class="main-inner">
+            <nav class="tab-top">
+                <div class="info tab">Info</div>
+                <div class="livecount tab selected">Live Subscriber Count</div>
+            </nav>
+
+            <div class="subcount">
+                <section class="card">
+                    <img src="https://i.pinimg.com/236x/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t" class="alt-pfp" alt="">
+                    <span class="channelName">Loading..</span>
+                    <span id="subscriberCount" class="subscriberCount">00,000,000</span>
+                    <span class="tts">subscribers</span>
+                </section>
+
+                <section class="card chart-card">
+                    <div id="subChart"></div>
+                </section>
+            </div>
+
+            <div class="infocontent">
+                <section class="card">
+                    <span class="mtx">Channel Description</span>
+                    <span class="mtxDesc">Can't load description</span>
+                </section>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="./yt-js.js"></script>
+    <script src="./jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
