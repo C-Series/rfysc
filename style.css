@@ -260,10 +260,6 @@ body, html {
     color: var(--text-muted);
 }
 
-.odometer {
-    line-height: 0.94em;
-}
-
 .fast_channel {
     display: block;
     width: 100%;
