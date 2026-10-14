@@ -18,7 +18,8 @@
 body, html {
     width: 100%;
     min-height: 100%;
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'Outfit', Arial, sans-serif;
+    font-variant-numeric: tabular-nums;
     background-color: var(--bg);
     color: var(--text);
 }
@@ -136,10 +137,11 @@ body, html {
 /* Main */
 .main {
     width: 100%;
+    display: block;
 }
 
 .main-inner {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 24px 20px 48px;
 }
@@ -173,7 +175,7 @@ body, html {
 /* Card */
 .card {
     margin-top: 20px;
-    padding: 48px 20px 56px;
+    padding: 12px 8px 12px;
     text-align: center;
     background-color: var(--surface);
     border: 1px solid var(--border);
@@ -198,6 +200,11 @@ body, html {
     border: 1px solid var(--border);
 }
 
+.alt-pfp:hover {
+    border-radius: 5%;
+    transition: 0.5s;
+}
+
 .channelName {
     display: block;
     margin-top: 20px;
@@ -214,7 +221,7 @@ body, html {
     display: inline-block;
     margin-top: 28px;
     font-size: clamp(48px, 11vw, 120px);
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text);
     font-variant-numeric: tabular-nums;
 }
@@ -238,6 +245,14 @@ body, html {
     cursor: pointer;
 }
 
+.grid-divider {
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+    justify-content: stretch;
+    gap: 20px;
+}
+
 .tts {
     display: block;
     margin-top: 4px;
@@ -253,15 +268,27 @@ body, html {
     display: block;
     width: 100%;
     height: 44px;
-    border-bottom: 1px rgb(180,180,180) solid;
+    border-bottom: 1px rgb(220, 220, 220) solid;
+}
+
+.fast_channel:hover {
+    background-color: rgb(200,200,200);
+    cursor: pointer;
+}
+
+.ratePerMinute, .goalCount {
+    font-size: 48px;
 }
 
 .channel_name {
-    display: inline-block;
+    display: block;
+    height: 100%;
     font-size: 18px;
     color: rgb(40,40,40);
-    margin-top: 10px;
-    margin-left: 10px;
+    text-indent: 8px;
+
+    place-items: center;
+    place-content: center;
 }
 
 .mtl {
@@ -280,18 +307,21 @@ body, html {
 .fast_pfp {
     display: block;
     float: left;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 0%;
     object-fit: cover;
-    margin: 4px;
-    box-shadow: 0px 0px 4px #000;
+    margin: 0px;
+    border: none;
+    border-right: rgb(220,220,220) solid 1px;
+    /* box-shadow: 0px 0px 4px #000; */
 }
 
 .side-bar {
-    position: absolute;
-    display: block;
+        display: block;
+    /* position: absolute; */
     width: 320px;
+    float: left;
     height: 100%;
     background-color: rgb(255,255,255);
 }
@@ -300,6 +330,42 @@ body, html {
     color: rgb(50,50,50);
     font-size: 18px;
     display: block;
+}
+
+.compare-pfp {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+}
+
+.compare-pfp:hover {
+    border-radius: 5%;
+    transition: 0.5s;
+}
+
+.compare_channelName {
+    display: block;
+    font-size: 42px;
+}
+
+.compare_subscriberCount {
+    font-size: 74px;
+    display: block;
+}
+
+.gap, .rpm2, .rpm1 {
+    font-size: 40px;
+}
+
+.compare_search {
+    width: 70%;
+    height: 110%;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    outline: none;
+    border: 1px rgb(200, 200, 200) solid;
 }
 
 @media (max-width: 600px) {

@@ -6,9 +6,11 @@
     <title>C-Series RFYSC</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="./odometer.css">
     <link rel="stylesheet" href="./style.css">
+    
     <link rel="icon" type="image/x-icon" href="https://c-series.github.io/rfysc/favicon.png">
 </head>
 <body>
@@ -38,6 +40,7 @@
             <nav class="tab-top">
                 <div class="info tab">Info</div>
                 <div class="livecount tab selected">Live Subscriber Count</div>
+                <div class="compare tab">Compare (BETA)</div>
             </nav>
 
             <div class="subcount">
@@ -47,6 +50,19 @@
                     <span id="subscriberCount" class="subscriberCount">00,000,000</span>
                     <span class="tts">subscribers</span>
                 </section>
+
+
+                <div class="grid-divider">
+                    <section class="card rate-per-min-card" style="width: 100%;">
+                        <span class="ratePerMinute">0</span>
+                        <span class="tts">subscribers per minute (avg)</span>
+                    </section>
+
+                    <section class="card goal-card" style="width: 100%;">
+                        <span class="goalCount">0</span>
+                        <span class="tts">to next goal (3-digit)</span>
+                    </section>
+                </div>
 
                 <section class="card chart-card">
                     <div id="subChart"></div>
@@ -58,6 +74,49 @@
                     <span class="mtx">Channel Description</span>
                     <span class="mtxDesc">Can't load description</span>
                 </section>
+            </div>
+
+            <div class="cmpr">
+                <div class="grid-divider">
+                    <section class="card" style="width: 100%;">
+                        <input type="text" id="search_ch1" class="compare_search" placeholder="Channel 1...">
+                    </section>
+
+                    <section class="card" style="width: 100%;">
+                      <input type="text" id="search_ch1" class="compare_search" placeholder="Channel 2...">
+                    </section>
+                </div>
+                <div class="grid-divider">
+                    <section class="card" style="width: 100%;">
+                        <img src="https://i.pinimg.com/236x/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t" class="compare-pfp cpf1" alt="">
+                        <span class="compare_channelName chNm1">Loading..</span>
+                        <span id="subscriberCount" class="compare_subscriberCount chNm1">00,000,000</span>
+                        <span class="tts">subscribers</span>
+                    </section>
+
+                    <section class="card" style="width: 100%;">
+                        <img src="https://i.pinimg.com/236x/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t" class="compare-pfp cpf2" alt="">
+                        <span class="compare_channelName chNm2">Loading..</span>
+                        <span id="subscriberCount" class="compare_subscriberCount chNm2">00,000,000</span>
+                        <span class="tts">subscribers</span>
+                    </section>
+                </div>
+                <div class="grid-divider">
+                    <section class="card" style="width: 100%;">
+                        <span class="compare_ratePerMinute rpm1">0</span>
+                        <span class="tts">subscribers per minute (avg)</span>
+                    </section>
+                    <section class="card" style="width: 100%;">
+                        <span class="compare_ratePerMinute rpm2">0</span>
+                        <span class="tts">subscribers per minute (avg)</span>
+                    </section>
+                </div>
+                <center>
+                    <section class="card" style="width: 30%;">
+                        <span class="compare_ratePerMinute gap">0</span>
+                        <span class="tts">subscriber gap</span>
+                    </section>
+                </center>
             </div>
             
         </div>
