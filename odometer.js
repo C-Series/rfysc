@@ -24,9 +24,9 @@
 
   DIGIT_SPEEDBOOST = .5;
 
-  MS_PER_FRAME = 300 / FRAMERATE;
+  MS_PER_FRAME = 1000 / FRAMERATE;
 
-  COUNT_MS_PER_FRAME = 300 / COUNT_FRAMERATE;
+  COUNT_MS_PER_FRAME = 1000 / COUNT_FRAMERATE;
 
   TRANSITION_END_EVENTS = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd';
 
