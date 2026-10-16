@@ -1,4 +1,4 @@
-var api = "https://falling-upload-rock-wishing.trycloudflare.com/api/channels"
+var api = "https://occasional-len-integrated-august.trycloudflare.com/api/channels"
 
 
 function abb(num) {
