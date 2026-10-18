@@ -18,7 +18,7 @@
 body, html {
     width: 100%;
     min-height: 100%;
-    font-family: 'Outfit', Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     font-variant-numeric: tabular-nums;
     background-color: var(--bg);
     color: var(--text);
