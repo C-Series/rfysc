@@ -158,11 +158,11 @@ function update() {
         }
         
         
-        var rpmOdo = initOdometer(".ratePerMinute", 2000, c.ratePerMinute);
+        var rpmOdo = initOdometer(".ratePerMinute", 2000, c.ratePerMinute * 60);
         var subOdo = initOdometer(".subscriberCount", 2000, c.subscriberCount);
         var goalOdo = initOdometer(".goalCount", 2000, calcGoal(c.subscriberCount));
         
-        rpmOdo.update(c.ratePerMinute);
+        rpmOdo.update(c.ratePerMinute * 60);
         subOdo.update(c.subscriberCount);
         goalOdo.update(calcGoal(c.subscriberCount));
         addChartPoint(c.subscriberCount);
