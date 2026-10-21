@@ -2,8 +2,9 @@
 // it's basic, you wont be suprised
 // anyway like and sub to my channel
 
-const API = "https://occasional-len-integrated-august.trycloudflare.com/api/channels";
-const API_FASTEST = "https://occasional-len-integrated-august.trycloudflare.com/api/fastest";
+const BASE = "https://hamiltion-rides-seriously-fed.trycloudflare.com/"
+const API = BASE + "api/channels";
+const API_FASTEST = BASE + "api/fastest";
 
 let currentId = 74;
 let allChannels = [];
