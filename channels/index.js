@@ -1,4 +1,4 @@
-var api = "https://hamiltion-rides-seriously-fed.trycloudflare.com/api/channels"
+var api = "https://hamilton-rides-seriously-fed.trycloudflare.com/api/channels"
 
 
 function abb(num) {
