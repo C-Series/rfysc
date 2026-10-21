@@ -24,7 +24,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id')
 
-    var api = "https://hamiltion-rides-seriously-fed.trycloudflare.com/api/channels";
+    var api = "https://hamilton-rides-seriously-fed.trycloudflare.com/api/channels";
 
     function update() {
         fetch(api + "?ids=" + id).then(res => res.json()).then(data => {
