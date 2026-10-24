@@ -1,4 +1,4 @@
-var api = "https://owners-canal-actress-drums.trycloudflare.com/api/channels"
+var api = "https://personalized-icq-hdtv-employ.trycloudflare.com/api/channels"
 
 
 function abb(num) {
