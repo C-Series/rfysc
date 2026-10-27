@@ -3,64 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>C-Series RFYSC</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./odometer.css">
     <link rel="stylesheet" href="./style.css">
-    
-    <link rel="icon" type="image/x-icon" href="https://c-series.github.io/rfysc/favicon.png">
+
+    <link rel="icon" type="image/png" href="./favicon.png">
 </head>
 <body>
     <header class="top">
         <div class="top-inner">
-            <span class="brand">C-Series' FYSC Stats</span>
-            <button class="ui-btn button_fullList">Full List</button>
+            <a class="brand" href="./">
+                <img src="./favicon.png" alt="" width="28" height="28">
+                <span>C-Series' FYSC Stats</span>
+            </a>
             <div class="search-wrap">
-                <input class="search-bar" type="search" placeholder="Search Channels" aria-label="Search channels" autocomplete="off">
+                <input class="search-bar" type="search" placeholder="Search channels" aria-label="Search channels" autocomplete="off">
                 <div class="search-results" style="display: none;"></div>
             </div>
+            <button class="ui-btn button_fullList" type="button">Full list</button>
         </div>
     </header>
 
-    <side class="side-bar">
-        <div class="fast-area">
-            <span class="mtl">Top 10 fastest gaining</span>
-
-            <div class="fast_ch_inner">
-
-            </div>
-        </div>
-    </side>
-
-    <main class="main">
-        <div class="main-inner">
-            <nav class="tab-top">
-                <div class="info tab">Info</div>
-                <div class="livecount tab selected">Live Subscriber Count</div>
-                <div class="compare tab">Compare (BETA)</div>
+    <div class="layout">
+        <main class="main">
+            <nav class="tab-top" role="tablist" aria-label="Views">
+                <button class="info tab" type="button" role="tab" aria-selected="false">Info</button>
+                <button class="livecount tab selected" type="button" role="tab" aria-selected="true"><span class="long">Live subscriber count</span><span class="short">Live count</span></button>
+                <button class="compare tab" type="button" role="tab" aria-selected="false">Compare <span class="beta">beta</span></button>
             </nav>
 
             <div class="subcount">
-                <section class="card">
-                    <img src="https://i.pinimg.com/236x/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t" class="alt-pfp" alt="">
-                    <span class="channelName">Loading..</span>
-                    <span id="subscriberCount" class="subscriberCount">00,000,000</span>
-                    <span class="tts">subscribers</span>
+                <section class="card hero">
+                    <div class="hero-id">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="alt-pfp" alt="">
+                        <div class="hero-name">
+                            <span class="channelName">Loading…</span>
+                            <span class="live-pill"><i aria-hidden="true"></i>Live</span>
+                        </div>
+                    </div>
+                    <div class="hero-count">
+                        <span id="subscriberCount" class="subscriberCount">00,000,000</span>
+                        <span class="tts">subscribers</span>
+                    </div>
                 </section>
 
-
                 <div class="grid-divider">
-                    <section class="card rate-per-min-card" style="width: 100%;">
+                    <section class="card stat rate-per-min-card">
                         <span class="ratePerMinute">0</span>
                         <span class="tts">subscribers per hour (avg)</span>
                     </section>
 
-                    <section class="card goal-card" style="width: 100%;">
+                    <section class="card stat goal-card">
                         <span class="goalCount">0</span>
-                        <span class="tts">to next goal (3-digit)</span>
+                        <span class="tts">to the next 100,000</span>
                     </section>
                 </div>
 
@@ -70,57 +70,66 @@
             </div>
 
             <div class="infocontent">
-                <section class="card">
-                    <span class="mtx">Channel Description</span>
-                    <span class="mtxDesc">Can't load description</span>
+                <section class="card info-card">
+                    <h2 class="mtx">Channel description</h2>
+                    <p class="mtxDesc">Can't load description</p>
                 </section>
             </div>
 
             <div class="cmpr">
                 <div class="grid-divider">
-                    <section class="card" style="width: 100%;">
-                        <input type="text" id="search_ch1" class="compare_search" placeholder="Channel 1...">
+                    <section class="card pick">
+                        <label for="search_ch1">Channel 1</label>
+                        <input type="text" id="search_ch1" class="compare_search" placeholder="Search a channel" autocomplete="off">
                     </section>
 
-                    <section class="card" style="width: 100%;">
-                      <input type="text" id="search_ch1" class="compare_search" placeholder="Channel 2...">
+                    <section class="card pick">
+                        <label for="search_ch2">Channel 2</label>
+                        <input type="text" id="search_ch2" class="compare_search" placeholder="Search a channel" autocomplete="off">
                     </section>
                 </div>
-                <div class="grid-divider">
-                    <section class="card" style="width: 100%;">
-                        <img src="https://i.pinimg.com/236x/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t" class="compare-pfp cpf1" alt="">
-                        <span class="compare_channelName chNm1">Loading..</span>
-                        <span id="subscriberCount" class="compare_subscriberCount chNm1">00,000,000</span>
+
+                <div class="grid-divider versus-row">
+                    <section class="card versus">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="compare-pfp cpf1" alt="">
+                        <span class="compare_channelName chNm1">Loading…</span>
+                        <span class="compare_subscriberCount chNm1">00,000,000</span>
                         <span class="tts">subscribers</span>
                     </section>
 
-                    <section class="card" style="width: 100%;">
-                        <img src="https://i.pinimg.com/236x/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t" class="compare-pfp cpf2" alt="">
-                        <span class="compare_channelName chNm2">Loading..</span>
-                        <span id="subscriberCount" class="compare_subscriberCount chNm2">00,000,000</span>
+                    <section class="card versus">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="compare-pfp cpf2" alt="">
+                        <span class="compare_channelName chNm2">Loading…</span>
+                        <span class="compare_subscriberCount chNm2">00,000,000</span>
                         <span class="tts">subscribers</span>
                     </section>
                 </div>
+
                 <div class="grid-divider">
-                    <section class="card" style="width: 100%;">
+                    <section class="card stat">
                         <span class="compare_ratePerMinute rpm1">0</span>
                         <span class="tts">subscribers per hour (avg)</span>
                     </section>
-                    <section class="card" style="width: 100%;">
+                    <section class="card stat">
                         <span class="compare_ratePerMinute rpm2">0</span>
                         <span class="tts">subscribers per hour (avg)</span>
                     </section>
                 </div>
-                <center>
-                    <section class="card" style="width: 30%;">
-                        <span class="compare_ratePerMinute gap">0</span>
-                        <span class="tts">subscriber gap</span>
-                    </section>
-                </center>
+
+                <section class="card stat gap-card">
+                    <span class="compare_ratePerMinute gap">0</span>
+                    <span class="tts">subscriber gap</span>
+                </section>
             </div>
-            
-        </div>
-    </main>
+        </main>
+
+        <aside class="side-bar" aria-label="Fastest gaining channels">
+            <div class="fast-area">
+                <h2 class="mtl">Top 10 fastest gaining</h2>
+                <div class="fast_ch_inner"></div>
+            </div>
+        </aside>
+    </div>
 
     <script src="./odometer.js"></script>
     <script src="./jquery.min.js"></script>

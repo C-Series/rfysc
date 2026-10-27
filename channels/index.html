@@ -3,114 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Lists</title>
+    <meta name="color-scheme" content="light dark">
+    <title>Full list · C-Series RFYSC</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./list.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
 </head>
 <body>
-    <div class="top">
-        <h1>Full List of all channels</h1>
-        <h3>Sorted by most subscribed</h3>
-    </div>
+    <header class="top">
+        <div class="top-inner">
+            <a class="brand" href="../">
+                <img src="../favicon.png" alt="" width="28" height="28">
+                <span>C-Series' FYSC Stats</span>
+            </a>
+            <div class="search-wrap">
+                <input class="search-bar list-filter" type="search" placeholder="Filter this list" aria-label="Filter channels" autocomplete="off">
+            </div>
+            <a class="ui-btn back-link" href="../">Live counter</a>
+        </div>
+    </header>
 
-    <div class="list">
-        
-    </div>
+    <main class="list-page">
+        <div class="list-head">
+            <h1>All channels</h1>
+            <p>Sorted by most subscribed. <span class="list-count"></span></p>
+        </div>
+
+        <div class="list">
+            <p class="list-status">Loading channels…</p>
+        </div>
+    </main>
+
+    <script src="../jquery.min.js"></script>
+    <script src="./index.js"></script>
 </body>
-<style>
-
-    body, html {
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-
-    .name {
-        display: block;
-        font-family: 'Outfit';
-        font-size: 27px;
-        white-space: nowrap;
-        text-overflow: clip;
-        overflow: hidden;
-        font-weight: 300;
-        color: #fff;
-        margin-left: 8px;
-        font-variant-numeric: tabular-nums;
-    }
-
-    .subscribers {
-        display: block;
-        font-family: 'Outfit';
-        font-size: 42px;
-        white-space: nowrap;
-        font-weight: 300;
-        color: #fff;
-        margin-left: 8px;
-        font-variant-numeric: tabular-nums;
-    }
-
-    h1 {
-        font-size: 44px;
-    }
-
-    h3 {
-        font-size: 28px;
-    }
-
-    .card-img {
-        width: 87px;
-        height: 87px;
-        object-fit: cover;
-        flex-shrink: 0;
-        border-radius: 5px;
-    }
-
-    .list {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 4px;
-    }
-
-    .card {
-        display: flex;
-        flex: 0 0 460px;
-        width: 460px;
-        height: 90px;
-        border-radius: 5px;
-        box-sizing: border-box;
-        background-color: rgb(30, 30, 30);
-        border: 1px solid rgb(80, 80, 80);
-    }
-
-    body {
-        background-color: rgb(45,45,45);
-    }
-
-    * {
-        padding: 0;
-        margin: 0;
-    }
-
-    .top {
-        font-family: 'Outfit';
-        color: #fff;
-
-        display: block;
-        width: 100%;
-        height: 210px;
-        text-align: center;
-        align-items: center;
-
-        margin-top: 4em;
-    }
-    
-</style>
-<script src="../jquery.min.js"></script>
-<script src="./index.js"></script>
 </html>

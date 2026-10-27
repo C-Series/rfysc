@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RFYSC embed</title>
     <link rel="stylesheet" href="./odometer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +23,7 @@
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id')
+    if (id == null) console.warn('RFYSC embed: add ?id=<channel id> to the URL');
 
     var api = "https://personalized-icq-hdtv-employ.trycloudflare.com/api/channels";
 

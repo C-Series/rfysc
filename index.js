@@ -16,25 +16,38 @@ Highcharts.setOptions({
     lang: { thousandsSep: "," }
 });
 
+function themeColors() {
+    const css = getComputedStyle(document.documentElement);
+    return {
+        accent: css.getPropertyValue("--accent").trim(),
+        muted: css.getPropertyValue("--text-muted").trim(),
+        line: css.getPropertyValue("--border").trim()
+    };
+}
+
+const colors = themeColors();
+
 const chart = Highcharts.chart("subChart", {
     chart: {
         type: "line",
         backgroundColor: "transparent",
-        style: { fontFamily: "Roboto, Arial, sans-serif" }
+        style: { fontFamily: "'Instrument Sans', system-ui, sans-serif" }
     },
+    credits: { enabled: false },
     title: { text: undefined },
     legend: { enabled: false },
     xAxis: {
         type: "datetime",
-        lineColor: "#e1e1e1",
-        tickColor: "#e1e1e1",
-        labels: { style: { color: "#777" } }
+        tickPixelInterval: 110,
+        lineColor: colors.line,
+        tickColor: colors.line,
+        labels: { style: { color: colors.muted } }
     },
     yAxis: {
         title: { text: undefined },
         allowDecimals: false,
-        gridLineColor: "#eee",
-        labels: { style: { color: "#777" } }
+        gridLineColor: colors.line,
+        labels: { style: { color: colors.muted } }
     },
     tooltip: {
         xDateFormat: "%H:%M:%S",
@@ -42,13 +55,23 @@ const chart = Highcharts.chart("subChart", {
     },
     plotOptions: {
         series: {
-            color: "#0c7eac",
-            lineWidth: 2,
+            color: colors.accent,
+            lineWidth: 2.5,
             marker: { enabled: false },
             animation: { duration: 400 }
         }
     },
     series: [{ name: "Subscribers", data: [] }]
+});
+
+// follow the OS light/dark setting
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+    const c = themeColors();
+    chart.update({
+        xAxis: { lineColor: c.line, tickColor: c.line, labels: { style: { color: c.muted } } },
+        yAxis: { gridLineColor: c.line, labels: { style: { color: c.muted } } },
+        plotOptions: { series: { color: c.accent } }
+    });
 });
 
 function addChartPoint(count) {
@@ -71,49 +94,46 @@ const tabs = {
     }
 }
 
-function closeTab(e) {
-    tabs[e].selector.classList.remove("selected");
-    tabs[e].content.style.display = "none";
-}
+let activeTab = "livecount";
 
-function openTab(e) {
-    tabs[e].selector.classList.add("selected");
-    tabs[e].content.style.display = "block";
+function setTab(name) {
+    activeTab = name;
+    Object.keys(tabs).forEach(function (key) {
+        const on = key === name;
+        tabs[key].selector.classList.toggle("selected", on);
+        tabs[key].selector.setAttribute("aria-selected", on ? "true" : "false");
+        tabs[key].content.style.display = on ? "block" : "none";
+    });
 }
 
 document.querySelector(".button_fullList").addEventListener("click", () => {
     window.location.href = "channels"
 })
 
-document.querySelector(".info").addEventListener("click", () => {
-    openTab('info');
-    closeTab('livecount');
-    closeTab('compare');
-})
+document.querySelector(".info").addEventListener("click", () => setTab("info"));
+document.querySelector(".livecount").addEventListener("click", () => setTab("livecount"));
+document.querySelector(".compare").addEventListener("click", () => setTab("compare"));
 
-document.querySelector(".livecount").addEventListener("click", () => {
-    closeTab('info');
-    closeTab('compare');
-    openTab('livecount')
-})
+setTab("livecount");
 
-document.querySelector(".compare").addEventListener("click", () => {
-    closeTab('info');
-    openTab('compare');
-    closeTab('livecount')
-})
+function markActive() {
+    $(".fast_channel").each(function () {
+        $(this).toggleClass("active", $(this).data("id") === currentId);
+    });
+}
 
 $.getJSON(API_FASTEST, function(e) {
-    for (let i = 0; i < 10; i++) {
-        const c = e.items[i];
+    const items = (e.items || []).slice(0, 10);
 
+    items.forEach(function (c) {
         const $element = $(`
-            <div class="fast_channel fast_channel_1" style="cursor: pointer;">
+            <button type="button" class="fast_channel">
                 <img src="${c.image}" alt="" class="fast_pfp">
                 <span class="channel_name"></span>
-            </div>
+            </button>
         `);
 
+        $element.data("id", c.id);
         $element.find(".channel_name").text(c.name);
 
         $element.on("click", function() {
@@ -123,11 +143,14 @@ $.getJSON(API_FASTEST, function(e) {
             $(".alt-pfp").attr("src", c.image);
             $(".channelName").text(c.name);
 
+            markActive();
             update();
         });
 
         $(".fast_ch_inner").append($element);
-    }
+    });
+
+    markActive();
 })
 
 function calcGoal(value) {
@@ -144,6 +167,13 @@ function initOdometer(el, dur, val) {
     });
 }
 
+// create each odometer once, on first data; later calls just return it
+const odos = {};
+function getOdo(key, el, dur, val) {
+    if (!odos[key]) odos[key] = initOdometer(el, dur, val);
+    return odos[key];
+}
+
 function update() {
     const id = currentId;
     $.getJSON(API + "?ids=" + id, function (e) {
@@ -154,14 +184,14 @@ function update() {
         if (c.info || c.description) {
             $(".mtxDesc").text(c.info || c.description);
         } else {
-            $(".mtxDesc").text("C-Series or the user has not set a description for this channel.");
+            $(".mtxDesc").text("No description has been set for this channel.");
         }
         
         
-        var rpmOdo = initOdometer(".ratePerMinute", 2000, c.ratePerMinute * 60);
-        var subOdo = initOdometer(".subscriberCount", 2000, c.subscriberCount);
-        var goalOdo = initOdometer(".goalCount", 2000, calcGoal(c.subscriberCount));
-        
+        var rpmOdo = getOdo("rpm", ".ratePerMinute", 2000, c.ratePerMinute * 60);
+        var subOdo = getOdo("subs", ".subscriberCount", 2000, c.subscriberCount);
+        var goalOdo = getOdo("goal", ".goalCount", 2000, calcGoal(c.subscriberCount));
+
         rpmOdo.update(c.ratePerMinute * 60);
         subOdo.update(c.subscriberCount);
         goalOdo.update(calcGoal(c.subscriberCount));
@@ -201,6 +231,7 @@ function selectChannel(c) {
     $(".channelName").text(c.name);
     $input.val("").blur();
     closeResults();
+    markActive();
     update();
 }
 
@@ -274,16 +305,6 @@ const cmp = {
     gapOdo: null
 };
 
-function cmpInjectCss() {
-    const style = document.createElement("style");
-    style.textContent = `
-        .cmp-wrap { position: relative; width: 100%; }
-        .cmp-wrap .compare_search { width: 100%; height: 110%; box-sizing: border-box; }
-        .cmp-wrap .search-results { position: absolute; top: 100%; left: 0; right: 0; z-index: 30; }
-    `;
-    document.head.appendChild(style);
-}
-
 function cmpInitOdometers() {
     cmp.sel.forEach(function (s, i) {
         cmp.odo[i].subs = initOdometer(s.subs, 1500, 0);
@@ -300,7 +321,7 @@ function cmpRender(slot) {
     $(s.pfp).attr("src", c.image);
     $(s.name).text(c.name);
     cmp.odo[slot].subs.update(c.subscriberCount);
-    cmp.odo[slot].rpm.update(c.ratePerMinute);
+    cmp.odo[slot].rpm.update(c.ratePerMinute * 60);
 
     setTimeout(cmpRenderGap, 80)
 }
@@ -330,7 +351,7 @@ function cmpFetch(slot) {
 }
 
 function cmpUpdate() {
-    if (tabs.compare.content.style.display === "none") return;
+    if (activeTab !== "compare") return;
     cmpFetch(0);
     cmpFetch(1);
 }
@@ -432,7 +453,6 @@ let cmpLoaded = false;
 function initCompare() {
     cmpLoaded = true;
 
-    cmpInjectCss();
     cmpInitOdometers();
 
     cmp.inputs.forEach(function (input, i) {
