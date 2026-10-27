@@ -1,4 +1,4 @@
-var api = "https://personalized-icq-hdtv-employ.trycloudflare.com/api/channels"
+var api = "https://trial-historic-data-usd.trycloudflare.com/api/channels"
 
 var channels = [];
 
