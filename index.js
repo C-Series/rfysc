@@ -2,7 +2,7 @@
 // it's basic, you wont be suprised
 // anyway like and sub to my channel
 
-const BASE = "https://instruments-obtaining-remain-blond.trycloudflare.com/"
+const BASE = "https://cologne-lil-pills-visited.trycloudflare.com/"
 const API = BASE + "api/channels";
 const API_FASTEST = BASE + "api/fastest";
 
