@@ -1,4 +1,4 @@
-var api = "https://instruments-obtaining-remain-blond.trycloudflare.com/api/channels"
+var api = "https://cologne-lil-pills-visited.trycloudflare.com/api/channels"
 
 var channels = [];
 
